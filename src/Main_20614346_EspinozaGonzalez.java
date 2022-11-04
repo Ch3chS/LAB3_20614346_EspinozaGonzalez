@@ -1,14 +1,15 @@
-import TDAs.pixbit;
+import TDAs.*;
 
 import java.io.IOException;
 
-public class Main {
+public class Main_20614346_EspinozaGonzalez {
     public static void main(String[] args) throws IOException {
 
 
         char exit = 'e';
         char opcion = 'i';
         char buffer_clean;
+
 
     // A continuación se encuentra el código para el menú
         while(opcion != exit){
