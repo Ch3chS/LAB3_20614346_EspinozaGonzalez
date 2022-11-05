@@ -1,6 +1,8 @@
-package TDAs;
+package TDAs.Pixels;
 
-public class Pixhex_20614346_EspinozaGonzalez extends Pixel_20614346_EspinozaGonzalez{
+import TDAs.Pixels.Pixel_20614346_EspinozaGonzalez;
+
+public class Pixhex_20614346_EspinozaGonzalez extends Pixel_20614346_EspinozaGonzalez {
 
     //Atributo
     String color;

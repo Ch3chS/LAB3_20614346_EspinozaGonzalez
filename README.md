@@ -7,3 +7,4 @@ Para compilar usar el comando .\compile.bat
 ## Changelog
     03/11/2022: Archivo batch agregado y estructura del menu iniciada
     04/11/2022: Clases de pixeles agregadas (incluyendo métodos invertColorBit y invertColorRGB)
+    05/11/2022: Clases de imagenes agregadas (incluyendo métodos para la creación de las mismas y su implementación en el menú)

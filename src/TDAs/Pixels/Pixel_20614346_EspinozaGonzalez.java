@@ -1,4 +1,4 @@
-package TDAs;
+package TDAs.Pixels;
 
 public class Pixel_20614346_EspinozaGonzalez{
 

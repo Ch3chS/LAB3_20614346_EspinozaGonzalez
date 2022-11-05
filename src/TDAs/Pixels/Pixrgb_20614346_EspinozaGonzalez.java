@@ -1,6 +1,8 @@
-package TDAs;
+package TDAs.Pixels;
 
-public class Pixrgb_20614346_EspinozaGonzalez extends Pixel_20614346_EspinozaGonzalez{
+import TDAs.Pixels.Pixel_20614346_EspinozaGonzalez;
+
+public class Pixrgb_20614346_EspinozaGonzalez extends Pixel_20614346_EspinozaGonzalez {
     //Atributos
     int r,g,b;
 

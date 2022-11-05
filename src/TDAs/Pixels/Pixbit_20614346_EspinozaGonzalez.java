@@ -1,6 +1,6 @@
-package TDAs;
+package TDAs.Pixels;
 
-public class Pixbit_20614346_EspinozaGonzalez extends Pixel_20614346_EspinozaGonzalez{
+public class Pixbit_20614346_EspinozaGonzalez extends Pixel_20614346_EspinozaGonzalez {
 
     //Atributos
     int color;
@@ -9,16 +9,16 @@ public class Pixbit_20614346_EspinozaGonzalez extends Pixel_20614346_EspinozaGon
     public Pixbit_20614346_EspinozaGonzalez(){}
 
     //Selector
-    public int getbit(){return color;}
+    public int getBit(){return color;}
 
     //Modificador
-    public void setbit(int newColor) {
+    public void setBit(int newColor) {
         if(color==0 | color==1){
         this.color = newColor;
         }
     }
 
     public void invertColorBit(){
-        setbit(1-getbit());
+        setBit(1-getBit());
     }
 }
