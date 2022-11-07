@@ -1,7 +1,6 @@
 package TDAs.Image;
 
 import TDAs.Pixels.*;
-import java.io.IOException;
 import java.util.*;
 
 public class Bitmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGonzalez{
@@ -11,9 +10,9 @@ public class Bitmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
     //Constructor
     public Bitmap_20614346_EspinozaGonzalez(){}
 
-    public void initImage(int width, int height) throws IOException {
+    public void initImage(int width, int height){
         Scanner r = new Scanner(System.in);  // Lector
-        int valor=0;
+        int valor;
         this.setWidth(width);
         this.setHeight(height);
         this.pixels = new Pixbit_20614346_EspinozaGonzalez[width][height];
@@ -38,4 +37,22 @@ public class Bitmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
     //selector
 
     public Pixbit_20614346_EspinozaGonzalez[][] getPixels() {return pixels;}
+
+
+    //Otras funciones
+
+    @Override
+    public String imageToString(){
+        if (compressed) return "La imagen se encuentra comprimida, por favor descomprimirla para poder visualizarla";
+        StringBuilder string= new StringBuilder();
+
+        for(int i=0; i<height; i++){
+            for(int j=0; j<width;j++) {
+                string.append(getPixels()[j][i].bitToString()).append("\t");
+            }
+            string.append("\n");
+        }
+
+        return string.toString();
+    }
 }

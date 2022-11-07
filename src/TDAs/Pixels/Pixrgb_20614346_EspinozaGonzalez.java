@@ -1,8 +1,6 @@
 package TDAs.Pixels;
 
-import TDAs.Pixels.Pixel_20614346_EspinozaGonzalez;
-
-public class Pixrgb_20614346_EspinozaGonzalez extends Pixel_20614346_EspinozaGonzalez {
+public class Pixrgb_20614346_EspinozaGonzalez extends Pixel_20614346_EspinozaGonzalez{
     //Atributos
     int r,g,b;
 
@@ -20,9 +18,15 @@ public class Pixrgb_20614346_EspinozaGonzalez extends Pixel_20614346_EspinozaGon
     public void setB(int b) {if(0<=b && b<=255) this.b = b;}
 
     //Otras Funciones
+
     public void invertColorRGB(){
         setR(255-getR());
         setG(255-getG());
         setB(255-getB());
+    }
+
+
+    public String rgbToString(){
+        return "(" + getR() + ", " + getG() + ", " + getB() + ")";
     }
 }

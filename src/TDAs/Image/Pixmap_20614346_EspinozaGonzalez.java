@@ -1,9 +1,6 @@
 package TDAs.Image;
 
-import TDAs.Pixels.Pixhex_20614346_EspinozaGonzalez;
 import TDAs.Pixels.Pixrgb_20614346_EspinozaGonzalez;
-
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGonzalez{
@@ -14,9 +11,9 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
     //Constructor
     public Pixmap_20614346_EspinozaGonzalez(){}
 
-    public void initImage(int width, int height) throws IOException {
+    public void initImage(int width, int height){
         Scanner r = new Scanner(System.in);  // Lector
-        int valor=0;
+        int valor;
         setWidth(width);
         setHeight(height);
         this.pixels = new Pixrgb_20614346_EspinozaGonzalez[width][height];
@@ -46,4 +43,18 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
 
     //selector
     public Pixrgb_20614346_EspinozaGonzalez[][] getPixels() {return pixels;}
+
+    @Override
+    public String imageToString(){
+        if (compressed) return "La imagen se encuentra comprimida, por favor descomprimirla para poder visualizarla";
+        StringBuilder string= new StringBuilder();
+        for(int i=0; i<height; i++){
+            for(int j=0; j<width;j++) {
+                string.append(getPixels()[j][i].rgbToString()).append("\t");
+            }
+            string.append("\n");
+        }
+
+        return string.toString();
+    }
 }

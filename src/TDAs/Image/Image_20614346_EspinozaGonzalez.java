@@ -2,6 +2,7 @@ package TDAs.Image;
 
 public class Image_20614346_EspinozaGonzalez {
     //Atributos
+    boolean compressed=false;
     int width, height;
 
     //Constructor
@@ -10,10 +11,12 @@ public class Image_20614346_EspinozaGonzalez {
     //Selectores
     public int getWidth() {return width;}
     public int getHeight() {return height;}
+    public boolean getCompressed() {return compressed;}
 
     //Modificadores
     public void setWidth(int width) {this.width = width;}
     public void setHeight(int height) {this.height = height;}
+    public void setCompressed(boolean compressed) {this.compressed = compressed;}
 
     //Otras funciones
     public boolean isBitmap(){
@@ -27,4 +30,9 @@ public class Image_20614346_EspinozaGonzalez {
     public boolean isPixmap(){
         return this.getClass() == Pixmap_20614346_EspinozaGonzalez.class;
     }
+
+    public String imageToString(){
+        return "";
+    }
+
 }

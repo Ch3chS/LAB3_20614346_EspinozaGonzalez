@@ -8,13 +8,7 @@ public class Pixel_20614346_EspinozaGonzalez{
     //Constructor
     public Pixel_20614346_EspinozaGonzalez(){}
 
-    public Pixel_20614346_EspinozaGonzalez(int x, int y, int depth) {
-        this.x = x;
-        this.y = y;
-        this.depth = depth;
-    }
 
-    // Metodos
     //selectores
     public int getX(){
         return x;

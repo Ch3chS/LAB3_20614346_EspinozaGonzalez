@@ -1,7 +1,5 @@
 package TDAs.Pixels;
 
-import TDAs.Pixels.Pixel_20614346_EspinozaGonzalez;
-
 public class Pixhex_20614346_EspinozaGonzalez extends Pixel_20614346_EspinozaGonzalez {
 
     //Atributo
