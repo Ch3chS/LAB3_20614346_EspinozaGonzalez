@@ -76,7 +76,7 @@ public class Main_20614346_EspinozaGonzalez {
 
                     if(imageToModIndex != -1){    // Si se selecciono la imagen correctamente procederemos con la eleccion de modificación
 
-                        if(images.get(imageToModIndex).getCompressed()){
+                        if(images.get(imageToModIndex).isCompressed()){
                             System.out.println("Esta imagen se encuentra comprimida\nEscoja una opción:\n1. Descomprimir imagen\n2. Volver");
                             opcion2=r.nextInt();
                             r.nextLine();
@@ -98,10 +98,6 @@ public class Main_20614346_EspinozaGonzalez {
                             System.out.println("\nImagen modificada, regresando...\n");
                         }
                     }
-                    else{
-                        imprimirMenu();
-                        break;
-                    }
 
                     imprimirMenu();
                     break;
@@ -109,19 +105,15 @@ public class Main_20614346_EspinozaGonzalez {
 
                 case "3": //Visualizar una imagen
 
-                    System.out.println("\n#### Selector de Imagenes ####");
-
-                    Image_20614346_EspinozaGonzalez imageToPrint = images.get(imageSelector());
+                    int imageToPrintIndex = imageSelector();
 
                     //Obtenemos la imagen o volvemos al inicio en caso de requerirlo
-                    if(imageToPrint != null){
+                    if(imageToPrintIndex != -1){
+                        Image_20614346_EspinozaGonzalez imageToPrint = images.get(imageToPrintIndex);
                         System.out.println(imageToPrint.imageToString());  //Imprimimos la imagen
                         System.out.println("\nImagen impresa, regresando...");
                     }
-                    else{
-                        imprimirMenu();
-                        break;
-                    }
+
                     //Volvemos al menu principal
                     imprimirMenu();
                     break;
@@ -129,6 +121,7 @@ public class Main_20614346_EspinozaGonzalez {
 
                 default:
                     System.out.println("\nLa opcion ingresada es incorrecta, por favor, intentelo nuevamente");
+                    imprimirMenu();
                     break;
             }
             System.out.print("Ingrese su opcion: ");
@@ -144,40 +137,8 @@ public class Main_20614346_EspinozaGonzalez {
         System.out.println("1. Crear una imagen\n2. Modificar una imagen\n3. Visualizar imagen\ne. salir\n");
     }
 
-
-    public static int menuMod(){
-        System.out.println("#### Modificadores de imagenes ####\nEscoja su opcion:\n");
-        System.out.println(
-                "1. op1" + "\n" +
-                "2. op2" + "\n" +
-                "10. Volver\n");
-
-        int choice = r.nextInt();
-        r.nextLine();
-        return choice;
-    }
-
-
-    public static void modImage(int index, int op){
-        switch (op){
-            case 1:
-                //images.get(index).nombreMetodo();
-                break;
-
-
-            case 2:
-                //images.get(index).nombreMetodo2();
-                break;
-
-
-            default:
-                System.out.println("\nLa opcion ingresada es incorrecta, por favor, intentelo nuevamente");
-                break;
-        }
-    }
-
-
     public static int imageSelector(){
+        System.out.println("\n#### Selector de Imagenes ####\nEscoja su opcion:\n");
 
         //Primero mostramos las opciones al usuario
         int i = 1;
@@ -215,5 +176,35 @@ public class Main_20614346_EspinozaGonzalez {
             return -1;               // Si ingreso un valor no correspondiente, se le avisa y se retorna
         }
 
+    }
+
+    public static int menuMod(){
+        System.out.println("#### Modificadores de imagenes ####\nEscoja su opcion:\n");
+        System.out.println("1. flipH (invertir horizontalmente)" + "\n" +
+                        "2. flipV (invertir verticalmente)" + "\n" +
+                        "10. Volver\n");
+
+        System.out.print("Ingrese su opcion: ");
+        int choice = r.nextInt();
+        r.nextLine();
+        System.out.println("\n");
+        return choice;
+    }
+
+    public static void modImage(int index, int op){
+        switch (op){
+            case 1:
+                images.set(index, images.get(index).flipH());
+                break;
+
+            case 2:
+                //images.set(index, images.get(index).flipV());
+                break;
+
+
+            default:
+                System.out.println("\nLa opcion ingresada es incorrecta, por favor, intentelo nuevamente");
+                break;
+        }
     }
 }
