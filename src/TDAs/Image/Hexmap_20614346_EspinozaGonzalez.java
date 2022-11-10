@@ -1,9 +1,10 @@
 package TDAs.Image;
 
 import TDAs.Pixels.Pixhex_20614346_EspinozaGonzalez;
+
 import java.util.Scanner;
 
-public class Hexmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGonzalez{
+public class Hexmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGonzalez implements Map_20614346_EspinozaGonzalez{
 
     //Atributos
     Pixhex_20614346_EspinozaGonzalez[][] pixels;

@@ -3,7 +3,7 @@ package TDAs.Image;
 import TDAs.Pixels.Pixrgb_20614346_EspinozaGonzalez;
 import java.util.Scanner;
 
-public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGonzalez{
+public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGonzalez implements Map_20614346_EspinozaGonzalez{
 
     //Atributos
     Pixrgb_20614346_EspinozaGonzalez[][] pixels;

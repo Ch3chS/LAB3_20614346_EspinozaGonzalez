@@ -3,12 +3,13 @@ package TDAs.Image;
 import TDAs.Pixels.*;
 import java.util.*;
 
-public class Bitmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGonzalez{
+public class Bitmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGonzalez implements Map_20614346_EspinozaGonzalez{
     //Atributos
     Pixbit_20614346_EspinozaGonzalez[][] pixels;
 
     //Constructor
     public Bitmap_20614346_EspinozaGonzalez(){}
+
 
     public void initImage(int width, int height){
         Scanner r = new Scanner(System.in);  // Lector
