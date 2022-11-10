@@ -58,6 +58,22 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
     }
 
     @Override
+    public Image_20614346_EspinozaGonzalez flipV(){
+        Pixrgb_20614346_EspinozaGonzalez temp;
+
+        for(int i=0; i<getHeight()/2; i++){
+            for(int j=0; j<getWidth();j++) {
+                temp = getPixels()[j][i];
+                getPixels()[j][i] = getPixels()[j][getHeight()-1-i];
+                getPixels()[j][getHeight()-1-i] = temp;
+
+            }
+        }
+
+        return this;
+    }
+
+    @Override
     public String imageToString(){
         if (isCompressed()) return "La imagen se encuentra comprimida, por favor descomprimirla para poder visualizarla";
         StringBuilder string= new StringBuilder();

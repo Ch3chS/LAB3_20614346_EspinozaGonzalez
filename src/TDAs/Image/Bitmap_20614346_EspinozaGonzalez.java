@@ -43,9 +43,9 @@ public class Bitmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
     //Otras funciones
 
     @Override
-    public Image_20614346_EspinozaGonzalez flipH() {
+    public Image_20614346_EspinozaGonzalez flipH(){
         Pixbit_20614346_EspinozaGonzalez[] temp;
-        for(int i=0; i < getWidth()/2;i++){
+        for(int i=0; i < getWidth()/2;i++){    //Ya que estamos yendo desde el inicio a la mitad y del final a la mitad solo lo hacemos ancho/2 veces, sino llegariamos a la misma imagen
             temp = getPixels()[i];
             getPixels()[i] = getPixels()[getWidth()-1-i];
             getPixels()[getWidth()-1-i] = temp;
@@ -55,12 +55,29 @@ public class Bitmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
 
 
     @Override
+    public Image_20614346_EspinozaGonzalez flipV(){
+        Pixbit_20614346_EspinozaGonzalez temp;
+
+        for(int i=0; i<getHeight()/2; i++){
+            for(int j=0; j<getWidth();j++) {
+                temp = getPixels()[j][i];
+                getPixels()[j][i] = getPixels()[j][getHeight()-1-i];
+                getPixels()[j][getHeight()-1-i] = temp;
+
+            }
+        }
+
+        return this;
+    }
+
+
+    @Override
     public String imageToString(){
         if (isCompressed()) return "La imagen se encuentra comprimida, por favor descomprimirla para poder visualizarla";
         StringBuilder string= new StringBuilder();
 
-        for(int i=0; i<height; i++){
-            for(int j=0; j<width;j++) {
+        for(int i=0; i<getHeight(); i++){
+            for(int j=0; j<getWidth();j++) {
                 string.append(getPixels()[j][i].bitToString()).append("\t");
             }
             string.append("\n");

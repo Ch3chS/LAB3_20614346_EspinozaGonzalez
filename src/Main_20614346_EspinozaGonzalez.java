@@ -198,7 +198,7 @@ public class Main_20614346_EspinozaGonzalez {
                 break;
 
             case 2:
-                //images.set(index, images.get(index).flipV());
+                images.set(index, images.get(index).flipV());
                 break;
 
 
