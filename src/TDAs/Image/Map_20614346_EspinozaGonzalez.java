@@ -10,8 +10,6 @@ public interface Map_20614346_EspinozaGonzalez {
 
     Image_20614346_EspinozaGonzalez flipV();
 
-    //Image_20614346_EspinozaGonzalez crop();
-
     //Image_20614346_EspinozaGonzalez changePixel(Pixel_20614346_EspinozaGonzalez pixel);
 
     //Image_20614346_EspinozaGonzalez depthLayers();

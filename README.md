@@ -12,3 +12,5 @@ Para compilar usar el comando .\compile.bat
     07/11/2022: imageToString agregado y menú mejorado
     08/11/2022: isCompressed y flipH agregados
     09/11/2022: flipV agregado
+    10/11/2022: interface Map agregada
+    11/11/2022: crop agregado

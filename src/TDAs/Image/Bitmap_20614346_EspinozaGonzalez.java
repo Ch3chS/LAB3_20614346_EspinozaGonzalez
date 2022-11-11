@@ -71,6 +71,22 @@ public class Bitmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
         return this;
     }
 
+    @Override
+    public Bitmap_20614346_EspinozaGonzalez crop(int x1, int y1, int x2, int y2){
+        Pixbit_20614346_EspinozaGonzalez[][] newPixels;
+        setWidth(x2 - x1 + 1);
+        setHeight(y2 - y1 + 1);
+        newPixels = new Pixbit_20614346_EspinozaGonzalez[getWidth()][getHeight()];
+
+        for(int i=0; i<getHeight(); i++){
+            for(int j=0; j<getWidth();j++){    // x = j,  y = i
+                newPixels[j][i] = getPixels()[j+x1][i+y1];
+            }
+        }
+        this.pixels = newPixels;
+        return this;
+    }
+
 
     @Override
     public String imageToString(){

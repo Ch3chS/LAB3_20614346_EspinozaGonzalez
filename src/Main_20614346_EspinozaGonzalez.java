@@ -201,6 +201,18 @@ public class Main_20614346_EspinozaGonzalez {
                 images.set(index, images.get(index).flipV());
                 break;
 
+            case 3:
+                System.out.print("\nCoordenada X1: ");
+                int x1 = r.nextInt();
+                System.out.print("\nCoordenada Y1: ");
+                int y1 = r.nextInt();
+                System.out.print("\nCoordenada X2: ");
+                int x2 = r.nextInt();
+                System.out.print("\nCoordenada Y2: ");
+                int y2 = r.nextInt();
+                r.nextLine();
+                images.set(index, images.get(index).crop(x1, y1, x2, y2));
+                break;
 
             default:
                 System.out.println("\nLa opcion ingresada es incorrecta, por favor, intentelo nuevamente");

@@ -40,6 +40,8 @@ public class Image_20614346_EspinozaGonzalez {
 
     public Image_20614346_EspinozaGonzalez flipV(){return this;}
 
+    public Image_20614346_EspinozaGonzalez crop(int x1, int y1, int x2, int y2){return this;}
+
     public String imageToString(){
         return "";
     }
