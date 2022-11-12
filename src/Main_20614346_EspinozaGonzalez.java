@@ -95,7 +95,7 @@ public class Main_20614346_EspinozaGonzalez {
                         }
                         else {
                             modImage(imageToModIndex, menuMod());    //Si la imagen es correcta y esta descomprimida la modificamos
-                            System.out.println("\nImagen modificada, regresando...\n");
+
                         }
                     }
 
@@ -182,6 +182,8 @@ public class Main_20614346_EspinozaGonzalez {
         System.out.println("#### Modificadores de imagenes ####\nEscoja su opcion:\n");
         System.out.println("1. flipH (invertir horizontalmente)" + "\n" +
                         "2. flipV (invertir verticalmente)" + "\n" +
+                        "3. crop (recortar)" + "\n" +
+                        "4. imgRGBToHex" + "\n" +
                         "10. Volver\n");
 
         System.out.print("Ingrese su opcion: ");
@@ -195,13 +197,16 @@ public class Main_20614346_EspinozaGonzalez {
         switch (op){
             case 1:
                 images.set(index, images.get(index).flipH());
+                System.out.println("\nImagen modificada, regresando...\n");
                 break;
 
             case 2:
                 images.set(index, images.get(index).flipV());
+                System.out.println("\nImagen modificada, regresando...\n");
                 break;
 
             case 3:
+                System.out.println("\nIngrese las coordenadas para el recorte: ");
                 System.out.print("\nCoordenada X1: ");
                 int x1 = r.nextInt();
                 System.out.print("\nCoordenada Y1: ");
@@ -212,6 +217,15 @@ public class Main_20614346_EspinozaGonzalez {
                 int y2 = r.nextInt();
                 r.nextLine();
                 images.set(index, images.get(index).crop(x1, y1, x2, y2));
+                System.out.println("\nImagen modificada, regresando...\n");
+                break;
+
+            case 4:
+                if(images.get(index).isPixmap()) {
+                    images.set(index, images.get(index).imgRGBToHex((Pixmap_20614346_EspinozaGonzalez) images.get(index)));
+                    System.out.println("\nImagen modificada, regresando...\n");
+                }
+                else System.out.println("La imagen ingresada no puede usar este método, debe ser un Pixmap.");
                 break;
 
             default:

@@ -1,6 +1,8 @@
 package TDAs.Image;
 
-import TDAs.Pixels.Pixel_20614346_EspinozaGonzalez;
+import TDAs.Pixels.Pixhex_20614346_EspinozaGonzalez;
+
+import java.util.Scanner;
 
 public class Image_20614346_EspinozaGonzalez {
     //Atributos
@@ -41,6 +43,31 @@ public class Image_20614346_EspinozaGonzalez {
     public Image_20614346_EspinozaGonzalez flipV(){return this;}
 
     public Image_20614346_EspinozaGonzalez crop(int x1, int y1, int x2, int y2){return this;}
+
+    public Hexmap_20614346_EspinozaGonzalez imgRGBToHex(Pixmap_20614346_EspinozaGonzalez imgRGB){
+
+        Hexmap_20614346_EspinozaGonzalez imgHex = new Hexmap_20614346_EspinozaGonzalez();
+        imgHex.setWidth(imgRGB.getWidth());
+        imgHex.setHeight(imgRGB.getHeight());
+        imgHex.pixels = new Pixhex_20614346_EspinozaGonzalez[width][height];
+
+        int r, g , b;
+        String hex;
+
+        for(int i=0; i<height; i++){                //Recorremos la matriz de pixeles
+            for(int j=0; j<width;j++){                    //Para cada pixel:
+                r = imgRGB.getPixels()[j][i].getR();           //Tomamos los valores r, g , b del pixel
+                g = imgRGB.getPixels()[j][i].getG();
+                b = imgRGB.getPixels()[j][i].getB();
+                hex = String.format("#%02x%02x%02x", r, g, b); //Transformamos a string hexadecimal formato #RRGGBB
+
+                imgHex.getPixels()[j][i] = new Pixhex_20614346_EspinozaGonzalez();  // inicializamos el pixhex
+                imgHex.getPixels()[j][i].setHex(hex);          //Almacenamos el color en los pixeles de igual posición
+                imgHex.getPixels()[j][i].setDepth(imgRGB.getPixels()[j][i].getDepth());  // Lo mismo con la profundidad
+            }
+        }
+        return imgHex;
+    }
 
     public String imageToString(){
         return "";
