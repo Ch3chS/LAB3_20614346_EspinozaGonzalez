@@ -1,5 +1,6 @@
 package TDAs.Image;
 
+import TDAs.Image.Histogram.BitHistogram_20614346_EspinozaGonzalez;
 import TDAs.Pixels.*;
 import java.util.*;
 
@@ -26,6 +27,7 @@ public class Bitmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
                 getPixels()[j][i].setY(i);
                 System.out.print("Ingrese el bit del pixel: ");
                 valor = r.nextInt();
+                if(valor != 0) valor = 1;   //Si se ingresa un numero mayor que 1 o menor que 0 se dará por hecho que se quería ingresar un 1
                 getPixels()[j][i].setBit(valor);
                 System.out.print("Ingrese la profundidad del pixel: ");
                 valor = r.nextInt();
@@ -87,6 +89,33 @@ public class Bitmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
         return this;
     }
 
+    public BitHistogram_20614346_EspinozaGonzalez histogram(){
+        BitHistogram_20614346_EspinozaGonzalez histogram = new BitHistogram_20614346_EspinozaGonzalez();  //Se crea objeto histogram
+
+        histogram = histogram.histogramInit(this);  //Se inicializa
+
+        return histogram;  //Se retorna
+    }
+
+    @Override
+    public Bitmap_20614346_EspinozaGonzalez rotate90(){
+        Pixbit_20614346_EspinozaGonzalez[][] newPixels;
+        Bitmap_20614346_EspinozaGonzalez img = new Bitmap_20614346_EspinozaGonzalez();
+        this.flipV();  //Invertimos los pixeles en el eje Y de la imagen original
+
+        newPixels = new Pixbit_20614346_EspinozaGonzalez[getHeight()][getWidth()];  //Nuevos pixeles con width y height intercambiados
+        img.setWidth(getHeight());    //Invertimos width y height para la imagen rotada
+        img.setHeight(getWidth());
+
+        for(int i=0; i<img.getHeight(); i++){
+            for(int j=0; j<img.getWidth();j++){    // x = j,  y = i
+                newPixels[j][i] = new Pixbit_20614346_EspinozaGonzalez();  //Inicializamos el pixel con coords (y, x)
+                newPixels[j][i] = this.getPixels()[i][j];                   //pixel nuevo (y,x) = pixel viejo (x,y) (intercambiamos x e y)
+            }
+        }
+        img.pixels = newPixels;
+        return img;
+    }
 
     @Override
     public String imageToString(){

@@ -2,9 +2,7 @@ package TDAs.Image;
 
 import TDAs.Pixels.Pixhex_20614346_EspinozaGonzalez;
 
-import java.util.Scanner;
-
-public class Image_20614346_EspinozaGonzalez {
+public class Image_20614346_EspinozaGonzalez{
     //Atributos
     boolean compressed=false;
     int width, height;
@@ -68,6 +66,9 @@ public class Image_20614346_EspinozaGonzalez {
         }
         return imgHex;
     }
+
+
+    public Image_20614346_EspinozaGonzalez rotate90(){return this;}
 
     public String imageToString(){
         return "";

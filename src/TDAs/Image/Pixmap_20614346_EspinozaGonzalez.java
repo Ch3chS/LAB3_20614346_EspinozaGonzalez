@@ -90,6 +90,26 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
     }
 
     @Override
+    public Pixmap_20614346_EspinozaGonzalez rotate90(){
+        Pixrgb_20614346_EspinozaGonzalez[][] newPixels;
+        Pixmap_20614346_EspinozaGonzalez img = new Pixmap_20614346_EspinozaGonzalez();
+        this.flipV();  //Invertimos los pixeles en el eje Y de la imagen original
+
+        newPixels = new Pixrgb_20614346_EspinozaGonzalez[getHeight()][getWidth()];  //Nuevos pixeles con width y height intercambiados
+        img.setWidth(getHeight());    //Invertimos width y height para la imagen rotada
+        img.setHeight(getWidth());
+
+        for(int i=0; i<img.getHeight(); i++){
+            for(int j=0; j<img.getWidth();j++){    // x = j,  y = i
+                newPixels[j][i] = new Pixrgb_20614346_EspinozaGonzalez();  //Inicializamos el pixel con coords (y, x)
+                newPixels[j][i] = this.getPixels()[i][j];                   //pixel nuevo (y,x) = pixel viejo (x,y) (intercambiamos x e y)
+            }
+        }
+        img.pixels = newPixels;
+        return img;
+    }
+
+    @Override
     public String imageToString(){
         if (isCompressed()) return "La imagen se encuentra comprimida, por favor descomprimirla para poder visualizarla";
         StringBuilder string= new StringBuilder();
