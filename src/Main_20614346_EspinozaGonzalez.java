@@ -184,6 +184,8 @@ public class Main_20614346_EspinozaGonzalez {
                         "2. flipV (invertir verticalmente)" + "\n" +
                         "3. crop (recortar)" + "\n" +
                         "4. imgRGBToHex" + "\n" +
+
+                        "6. rotate90 (rotar a la derecha)" + "\n" +
                         "10. Volver\n");
 
         System.out.print("Ingrese su opcion: ");
@@ -226,6 +228,12 @@ public class Main_20614346_EspinozaGonzalez {
                     System.out.println("\nImagen modificada, regresando...\n");
                 }
                 else System.out.println("La imagen ingresada no puede usar este método, debe ser un Pixmap.");
+                break;
+
+
+            case 6:
+                images.set(index, images.get(index).rotate90());
+                System.out.println("\nImagen modificada, regresando...\n");
                 break;
 
             default:

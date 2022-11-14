@@ -1,5 +1,6 @@
 package TDAs.Image;
 
+import TDAs.Image.Histogram.PixHistogram_20614346_EspinozaGonzalez;
 import TDAs.Pixels.Pixrgb_20614346_EspinozaGonzalez;
 import java.util.Scanner;
 
@@ -87,6 +88,14 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
         }
         this.pixels = newPixels;
         return this;
+    }
+
+    public PixHistogram_20614346_EspinozaGonzalez histogram(){
+        PixHistogram_20614346_EspinozaGonzalez histogram = new PixHistogram_20614346_EspinozaGonzalez();  //Se crea objeto histogram
+
+        histogram = histogram.histogramInit(this);  //Se inicializa
+
+        return histogram;  //Se retorna
     }
 
     @Override

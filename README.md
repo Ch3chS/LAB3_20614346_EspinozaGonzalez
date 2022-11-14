@@ -14,3 +14,7 @@ Para compilar usar el comando .\compile.bat
     09/11/2022: flipV agregado
     10/11/2022: interface Map agregada
     11/11/2022: crop agregado
+    12/11/2022: imgRGBToHex agregado
+    13/11/2022: rotate90 agregado
+    14/11/2022: histogram agregado
+    

@@ -2,9 +2,11 @@ package TDAs.Image;
 
 import TDAs.Pixels.Pixhex_20614346_EspinozaGonzalez;
 
+import java.util.Objects;
+
 public class Image_20614346_EspinozaGonzalez{
     //Atributos
-    boolean compressed=false;
+    String mostUsed = ""; //El mostUsed es un valor que se setea al comprimir la imagen y se devuelve a "" al descomprimirla
     int width, height;
 
     //Constructor
@@ -13,13 +15,13 @@ public class Image_20614346_EspinozaGonzalez{
     //Selectores
     public int getWidth() {return width;}
     public int getHeight() {return height;}
-    public boolean getCompressed() {return compressed;}
+    public String getMostUsed() {return mostUsed;}
 
 
     //Modificadores
     public void setWidth(int width) {this.width = width;}
     public void setHeight(int height) {this.height = height;}
-    public void setCompressed(boolean compressed) {this.compressed = compressed;}
+    public void setMostUsed(String mostused) {this.mostUsed = mostused;}
 
     //Otras funciones
     public boolean isBitmap(){
@@ -34,7 +36,9 @@ public class Image_20614346_EspinozaGonzalez{
         return this.getClass() == Pixmap_20614346_EspinozaGonzalez.class;
     }
 
-    public boolean isCompressed(){return getCompressed();}
+    public boolean isCompressed(){
+        return !Objects.equals(getMostUsed(), "");
+    }
 
     public Image_20614346_EspinozaGonzalez flipH(){return this;}
 
