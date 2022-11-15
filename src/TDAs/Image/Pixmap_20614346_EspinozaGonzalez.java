@@ -1,7 +1,10 @@
 package TDAs.Image;
 
 import TDAs.Image.Histogram.PixHistogram_20614346_EspinozaGonzalez;
+import TDAs.Pixels.Pixbit_20614346_EspinozaGonzalez;
 import TDAs.Pixels.Pixrgb_20614346_EspinozaGonzalez;
+
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGonzalez implements Map_20614346_EspinozaGonzalez{
@@ -119,6 +122,46 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
     }
 
     @Override
+    public Pixmap_20614346_EspinozaGonzalez compress(){
+        if(!this.isCompressed()){    //Si no esta comprimida la comprimimos
+
+            //Preparación pre-compresión
+            PixHistogram_20614346_EspinozaGonzalez histogram = histogram();
+            setMostUsed(histogram.MostUsed());  //Seteamos el color más usado para su posterior uso aquí y en decompress
+            String temp;
+
+            //Compresión
+            for(int i=0; i<getHeight(); i++){
+                for(int j=0; j<getWidth();j++){    // x = j,  y = i
+                    temp = getPixels()[j][i].getR() + " " + getPixels()[j][i].getG() + " " + getPixels()[j][i].getB();
+                    if(temp.equals(getMostUsed())){   //Si el bit del pixel es el más usado:
+                        depths.add(getPixels()[j][i].getDepth());  //Almacenamos la profundidad del pixel para cuando se descomprima la imagen
+                        getPixels()[j][i] = null;         //eliminamos el pixel de la imagen
+                    }
+                }
+            }
+
+            return this;  //Retornamos la imagen ya comprimida
+        }
+        return this;   //Si la imagen ya estaba comprimida no le hacemos nada y la retornamos
+        //(no esta la posibilidad en el menú de que no este comprimida y acceda a esto pero para que este tratado el caso)
+    }
+
+    public Pixmap_20614346_EspinozaGonzalez changePixel(Pixrgb_20614346_EspinozaGonzalez pixel){
+        getPixels()[pixel.getX()][pixel.getY()] = pixel;
+        return this;
+    }
+
+    public Pixmap_20614346_EspinozaGonzalez invertColorRGB(){
+        for(int i=0; i<getHeight(); i++){
+            for(int j=0; j<getWidth();j++) {
+                getPixels()[j][i].invertColorRGB(); //Simplemente aplicamos el método de la clase Pixrgb a cada pixel
+            }
+        }
+        return this;
+    }
+
+    @Override
     public String imageToString(){
         if (isCompressed()) return "La imagen se encuentra comprimida, por favor descomprimirla para poder visualizarla";
         StringBuilder string= new StringBuilder();
@@ -130,5 +173,58 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
         }
 
         return string.toString();
+    }
+
+    public LinkedList<Pixmap_20614346_EspinozaGonzalez> depthLayers(){
+        LinkedList<Pixmap_20614346_EspinozaGonzalez> LayerList = new LinkedList<>();
+
+        for(int k = 0; k <= maxDepth(); k++){                    //Haremos esto en cada capa de la imagen
+            LayerList.add(new Pixmap_20614346_EspinozaGonzalez());  //Agregamos una nueva imagen a la lista
+            LayerList.get(k).setWidth(getWidth());
+            LayerList.get(k).setHeight(getHeight());  //Las imagenes de la lista poseen las mismas dimensiones que la original
+            LayerList.get(k).pixels = new Pixrgb_20614346_EspinozaGonzalez[getWidth()][getHeight()];   //Inicializamos los pixeles
+
+            for(int i=0; i<getHeight(); i++){       //Ahora se le dará valores de color a los pixeles de la capa,
+                for(int j=0; j<getWidth();j++) {    //Si no se encuentran en la capa se rellenara con color blanco
+                    LayerList.get(k).getPixels()[j][i] = new Pixrgb_20614346_EspinozaGonzalez();
+                    if(getPixels()[j][i].getDepth() == k){            //Si son de la misma profundidad guardamos el color rgb
+                        LayerList.get(k).getPixels()[j][i].setR(getPixels()[j][i].getR());
+                        LayerList.get(k).getPixels()[j][i].setG(getPixels()[j][i].getG());
+                        LayerList.get(k).getPixels()[j][i].setB(getPixels()[j][i].getB());
+                    }
+                    else{
+                        LayerList.get(k).getPixels()[j][i].setR(255); //caso contrario el color será blanco rgb
+                        LayerList.get(k).getPixels()[j][i].setG(255);
+                        LayerList.get(k).getPixels()[j][i].setB(255);
+                    }
+                    LayerList.get(k).getPixels()[j][i].setDepth(k);   //Para cualquiera de ambos la profundidad es k
+                }
+            }
+        }
+        return LayerList;
+    }
+
+    @Override
+    public Pixmap_20614346_EspinozaGonzalez decompress(){
+        String[] mostused = getMostUsed().split(" ");
+        int R = Integer.parseInt(mostused[0]);
+        int G = Integer.parseInt(mostused[1]);
+        int B = Integer.parseInt(mostused[2]);
+        int depthIndex = 0;
+
+        for(int i=0; i<getHeight(); i++){
+            for(int j=0; j<getWidth();j++){
+                if(getPixels()[j][i] == null){   //Si el pixel no se encuentra (fue eliminado al comprimir)
+                    getPixels()[j][i] = new Pixrgb_20614346_EspinozaGonzalez();  //Creamos uno nuevo
+                    getPixels()[j][i].setR(R);                                   //Con el color más usado pre compresión
+                    getPixels()[j][i].setG(G);
+                    getPixels()[j][i].setB(B);
+                    getPixels()[j][i].setDepth(depths.get(depthIndex));          //Obtenemos la profundidad del mismo
+                    depthIndex++;    //Aumentamos el index para la profundidad del siguiente pixel previamente eliminado
+                }
+            }
+        }
+        setMostUsed("");    //devolvemos el mostUsed al valor "" para que se sepa que esta descomprimida
+        return this;
     }
 }

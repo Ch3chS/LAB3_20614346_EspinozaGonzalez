@@ -1,5 +1,8 @@
 import java.util.*;
 import TDAs.Image.*;
+import TDAs.Pixels.Pixbit_20614346_EspinozaGonzalez;
+import TDAs.Pixels.Pixhex_20614346_EspinozaGonzalez;
+import TDAs.Pixels.Pixrgb_20614346_EspinozaGonzalez;
 
 public class Main_20614346_EspinozaGonzalez {
     static LinkedList<Image_20614346_EspinozaGonzalez> images = new LinkedList<>();  //Este sera el almacen de imagenes
@@ -37,7 +40,10 @@ public class Main_20614346_EspinozaGonzalez {
                             Bitmap_20614346_EspinozaGonzalez i1 = new Bitmap_20614346_EspinozaGonzalez();
                             i1.initImage(width,height);
                             images.add(i1);
-                            System.out.println("Imagen creada, Regresando...");
+                            System.out.println("Bitmap creado");
+                            System.out.println("Ancho: "+ i1.getWidth() + ", Alto: " + i1.getHeight() + "\n");
+                            System.out.println(i1.imageToString());
+                            System.out.println("Regresando...\n");
                             break;
 
 
@@ -45,7 +51,10 @@ public class Main_20614346_EspinozaGonzalez {
                             Pixmap_20614346_EspinozaGonzalez i2 = new Pixmap_20614346_EspinozaGonzalez();
                             i2.initImage(width,height);
                             images.add(i2);
-                            System.out.println("Imagen creada, Regresando...");
+                            System.out.println("Pixmap creado");
+                            System.out.println("Ancho: "+ i2.getWidth() + ", Alto: " + i2.getHeight() + "\n");
+                            System.out.println(i2.imageToString());
+                            System.out.println("Regresando...\n");
                             break;
 
 
@@ -53,7 +62,10 @@ public class Main_20614346_EspinozaGonzalez {
                             Hexmap_20614346_EspinozaGonzalez i3 = new Hexmap_20614346_EspinozaGonzalez();
                             i3.initImage(width,height);
                             images.add(i3);
-                            System.out.println("Imagen creada, Regresando...");
+                            System.out.println("Hexmap creado");
+                            System.out.println("Ancho: "+ i3.getWidth() + ", Alto: " + i3.getHeight() + "\n");
+                            System.out.println(i3.imageToString());
+                            System.out.println("Regresando...");
                             break;
 
 
@@ -77,13 +89,14 @@ public class Main_20614346_EspinozaGonzalez {
                     if(imageToModIndex != -1){    // Si se selecciono la imagen correctamente procederemos con la eleccion de modificación
 
                         if(images.get(imageToModIndex).isCompressed()){
-                            System.out.println("Esta imagen se encuentra comprimida\nEscoja una opción:\n1. Descomprimir imagen\n2. Volver");
+                            System.out.println("Esta imagen se encuentra comprimida\nEscoja una opcion:\n1. Descomprimir imagen\n2. Volver\n");
+                            System.out.print("Ingrese su eleccion: ");
                             opcion2=r.nextInt();
                             r.nextLine();
 
                             switch (opcion2){
                                 case 1:
-                                    //images.get(imageToModIndex).decompress();
+                                    images.get(imageToModIndex).decompress();
                                     System.out.println("\nImagen descomprimida, regresando...\n");
                                     break;
                                 case 2: break;
@@ -186,6 +199,8 @@ public class Main_20614346_EspinozaGonzalez {
                         "4. imgRGBToHex" + "\n" +
 
                         "6. rotate90 (rotar a la derecha)" + "\n" +
+                        "7. compress (comrpimir imagen)" + "\n" +
+                        "8. changePixel (cambiar pixel en especifico)" + "\n" +
                         "10. Volver\n");
 
         System.out.print("Ingrese su opcion: ");
@@ -230,11 +245,71 @@ public class Main_20614346_EspinozaGonzalez {
                 else System.out.println("La imagen ingresada no puede usar este método, debe ser un Pixmap.");
                 break;
 
-
             case 6:
                 images.set(index, images.get(index).rotate90());
                 System.out.println("\nImagen modificada, regresando...\n");
                 break;
+
+            case 7:
+                images.set(index, images.get(index).compress());
+                System.out.println("\nImagen modificada, regresando...\n");
+                break;
+
+            case 8:  //En el caso de changePixel primero debemos crear un pixel del respectivo tipo, luego llamar al método
+                System.out.print("\nIngrese la coordenada X del pixel a cambiar: ");
+                int x = r.nextInt();
+                System.out.print("Ingrese la coordenada Y del pixel a cambiar: ");
+                int y = r.nextInt();
+                r.nextLine();
+
+                if(images.get(index).isBitmap()){
+                    Bitmap_20614346_EspinozaGonzalez i = (Bitmap_20614346_EspinozaGonzalez) images.get(index);
+                    Pixbit_20614346_EspinozaGonzalez pixel = new Pixbit_20614346_EspinozaGonzalez();
+                    pixel.setX(x);
+                    pixel.setY(y);
+                    System.out.print("Ingrese el bit: ");
+                    pixel.setBit(r.nextInt());
+                    System.out.print("Ingrese la profundidad: ");
+                    pixel.setDepth(r.nextInt());
+                    r.nextLine();
+                    //depth
+                    images.set(index, i.changePixel(pixel));
+                }
+                if(images.get(index).isPixmap()){
+                    Pixmap_20614346_EspinozaGonzalez i = (Pixmap_20614346_EspinozaGonzalez) images.get(index);
+                    Pixrgb_20614346_EspinozaGonzalez pixel = new Pixrgb_20614346_EspinozaGonzalez();
+                    pixel.setX(x);
+                    pixel.setY(y);
+                    System.out.print("Ingrese el valor de r: ");
+                    pixel.setR(r.nextInt());
+                    System.out.print("Ingrese el valor de g: ");
+                    pixel.setG(r.nextInt());
+                    System.out.print("Ingrese el valor de b: ");
+                    pixel.setB(r.nextInt());
+                    System.out.print("Ingrese la profundidad: ");
+                    pixel.setDepth(r.nextInt());
+                    r.nextLine();
+                    //depth
+                    images.set(index, i.changePixel(pixel));
+                }
+                if(images.get(index).isHexmap()){
+                    Hexmap_20614346_EspinozaGonzalez i = (Hexmap_20614346_EspinozaGonzalez) images.get(index);
+                    Pixhex_20614346_EspinozaGonzalez pixel = new Pixhex_20614346_EspinozaGonzalez();
+                    pixel.setX(x);
+                    pixel.setY(y);
+                    System.out.print("Ingrese el color hexadecimal: ");
+                    pixel.setHex(r.nextLine());
+                    System.out.print("Ingrese la profundidad: ");
+                    pixel.setDepth(r.nextInt());
+                    r.nextLine();
+                    //depth
+                    images.set(index, i.changePixel(pixel));
+                }
+
+
+                System.out.println("\nImagen modificada, regresando...\n");
+                break;
+
 
             default:
                 System.out.println("\nLa opcion ingresada es incorrecta, por favor, intentelo nuevamente");

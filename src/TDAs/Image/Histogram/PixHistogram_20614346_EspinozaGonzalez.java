@@ -62,7 +62,7 @@ public class PixHistogram_20614346_EspinozaGonzalez{
         for(PixHistogramLink_20614346_EspinozaGonzalez link: histogram){
             if(cant < link.getCantidad()) {
                 cant = link.getCantidad();
-                mostused = "(" + link.getR() + ", " + link.getG() + ", " + link.getB() + ")";
+                mostused = link.getR() + " " + link.getG() + " " + link.getB();
             }
         }
         return mostused;

@@ -1,12 +1,19 @@
 package TDAs.Image;
 
+import TDAs.Pixels.Pixbit_20614346_EspinozaGonzalez;
+import TDAs.Pixels.Pixel_20614346_EspinozaGonzalez;
 import TDAs.Pixels.Pixhex_20614346_EspinozaGonzalez;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 public class Image_20614346_EspinozaGonzalez{
     //Atributos
     String mostUsed = ""; //El mostUsed es un valor que se setea al comprimir la imagen y se devuelve a "" al descomprimirla
+    List<Integer> depths = new ArrayList<>();  //Esto solo se usara si se comprime una imagen, para guardar las profundidades de los pixeles eliminados
+
     int width, height;
 
     //Constructor
@@ -21,7 +28,7 @@ public class Image_20614346_EspinozaGonzalez{
     //Modificadores
     public void setWidth(int width) {this.width = width;}
     public void setHeight(int height) {this.height = height;}
-    public void setMostUsed(String mostused) {this.mostUsed = mostused;}
+    public void setMostUsed(String mostUsed){this.mostUsed = mostUsed;}
 
     //Otras funciones
     public boolean isBitmap(){
@@ -74,8 +81,9 @@ public class Image_20614346_EspinozaGonzalez{
 
     public Image_20614346_EspinozaGonzalez rotate90(){return this;}
 
-    public String imageToString(){
-        return "";
-    }
+    public Image_20614346_EspinozaGonzalez compress(){return this;}
 
+    public String imageToString(){return "";}
+
+    public Image_20614346_EspinozaGonzalez decompress(){return this;}
 }
