@@ -18,4 +18,4 @@ Para compilar usar el comando .\compile.bat
     13/11/2022: rotate90 agregado
     14/11/2022: histogram agregado
     15/11/2022: compress, changePixel, depthLayers y decompress agregados; invertColorBit e invertColorRGB actualizados
-    
+    16/11/2022: Mejoras en opciones de vizualización en el menú, faltan mejoras el apartado de los modificadores

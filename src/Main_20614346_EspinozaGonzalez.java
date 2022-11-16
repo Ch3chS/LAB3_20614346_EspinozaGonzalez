@@ -1,10 +1,13 @@
 import java.util.*;
 import TDAs.Image.*;
 import TDAs.Pixels.Pixbit_20614346_EspinozaGonzalez;
-import TDAs.Pixels.Pixhex_20614346_EspinozaGonzalez;
 import TDAs.Pixels.Pixrgb_20614346_EspinozaGonzalez;
+import TDAs.Pixels.Pixhex_20614346_EspinozaGonzalez;
+import TDAs.Image.Histogram.*;
+import TDAs.Image.Histogram.HistogramLinks.*;
 
 public class Main_20614346_EspinozaGonzalez {
+
     static LinkedList<Image_20614346_EspinozaGonzalez> images = new LinkedList<>();  //Este sera el almacen de imagenes
     static Scanner r = new Scanner(System.in);  // Escaner para las entradas
     public static void main(String[] args){
@@ -88,7 +91,7 @@ public class Main_20614346_EspinozaGonzalez {
 
                     if(imageToModIndex != -1){    // Si se selecciono la imagen correctamente procederemos con la eleccion de modificación
 
-                        if(images.get(imageToModIndex).isCompressed()){
+                        if(images.get(imageToModIndex).isCompressed()){   //Si la imagen se encuentra comprimida solo se ofrecen 2 opciones
                             System.out.println("Esta imagen se encuentra comprimida\nEscoja una opcion:\n1. Descomprimir imagen\n2. Volver\n");
                             System.out.print("Ingrese su eleccion: ");
                             opcion2=r.nextInt();
@@ -120,11 +123,89 @@ public class Main_20614346_EspinozaGonzalez {
 
                     int imageToPrintIndex = imageSelector();
 
+                    if(images.get(imageToPrintIndex).isCompressed()){
+                        System.out.println("La imagen seleccionada se encuentra comprimida, por favor descomrpimirla antes de poder visualizarla\n");
+                        imprimirMenu();
+                        break;
+                    }
                     //Obtenemos la imagen o volvemos al inicio en caso de requerirlo
                     if(imageToPrintIndex != -1){
-                        Image_20614346_EspinozaGonzalez imageToPrint = images.get(imageToPrintIndex);
-                        System.out.println(imageToPrint.imageToString());  //Imprimimos la imagen
-                        System.out.println("\nImagen impresa, regresando...");
+                        System.out.println("\nQue tipo de impresión desea realizar: \n\n1. Imprimir imagen\n2. Imprimir capas (depthLayers)\n3. Imprimir histograma de colores\n");
+                        System.out.print("\nEscoja una opcion: ");
+                        int opcion3 = r.nextInt();
+                        r.nextLine();
+                        System.out.print("\n");
+                        switch (opcion3){
+                            case 1:   //Imprimir imagen como tal
+                                Image_20614346_EspinozaGonzalez imageToPrint = images.get(imageToPrintIndex);
+                                System.out.println(imageToPrint.imageToString());  //Imprimimos la imagen
+                                System.out.println("\nImagen impresa, regresando...");
+                                
+                            case 2:   //Imprimir capas (DepthLayers)
+                                int capa = 0;
+                                if(images.get(imageToPrintIndex).isBitmap()) {
+                                    LinkedList<Bitmap_20614346_EspinozaGonzalez> Layers;
+                                    Bitmap_20614346_EspinozaGonzalez  BM = (Bitmap_20614346_EspinozaGonzalez) images.get(imageToPrintIndex);
+                                    Layers = BM.depthLayers();
+                                    for (Bitmap_20614346_EspinozaGonzalez image : Layers) {
+                                        System.out.println("\nCapa " + capa + ": \n");
+                                        System.out.println(image.imageToString());
+                                        capa++;
+                                    }
+                                }
+                                if(images.get(imageToPrintIndex).isPixmap()) {
+                                    LinkedList<Pixmap_20614346_EspinozaGonzalez> Layers;
+                                    Pixmap_20614346_EspinozaGonzalez  PM = (Pixmap_20614346_EspinozaGonzalez) images.get(imageToPrintIndex);
+                                    Layers = PM.depthLayers();
+
+                                    for (Pixmap_20614346_EspinozaGonzalez image : Layers) {
+                                        System.out.println("\nCapa " + capa + ": \n");
+                                        System.out.println(image.imageToString());
+                                        capa++;
+                                    }
+                                }
+                                if(images.get(imageToPrintIndex).isHexmap()) {
+                                    LinkedList<Hexmap_20614346_EspinozaGonzalez> Layers;
+                                    Hexmap_20614346_EspinozaGonzalez  HM = (Hexmap_20614346_EspinozaGonzalez) images.get(imageToPrintIndex);
+                                    Layers = HM.depthLayers();
+                                    for (Hexmap_20614346_EspinozaGonzalez image : Layers) {
+                                        System.out.println("\nCapa " + capa + ": \n");
+                                        System.out.println(image.imageToString());
+                                        capa++;
+                                    }
+                                }
+                                break;
+                                
+                            case 3:   //Imprimir histograma (histogram)
+                                if(images.get(imageToPrintIndex).isBitmap()) {
+                                    BitHistogram_20614346_EspinozaGonzalez histogram;
+                                    Bitmap_20614346_EspinozaGonzalez  BM = (Bitmap_20614346_EspinozaGonzalez) images.get(imageToPrintIndex);
+                                    histogram = BM.histogram();
+                                    for (BitHistogramLink_20614346_EspinozaGonzalez link : histogram.getHistogram())
+                                        System.out.println("Color: " + link.getBit() + ", Se repite: " + link.getCantidad() + " veces");
+                                }
+                                if(images.get(imageToPrintIndex).isPixmap()) {
+                                    PixHistogram_20614346_EspinozaGonzalez histogram;
+                                    Pixmap_20614346_EspinozaGonzalez  PM = (Pixmap_20614346_EspinozaGonzalez) images.get(imageToPrintIndex);
+                                    histogram = PM.histogram();
+                                    for (PixHistogramLink_20614346_EspinozaGonzalez link : histogram.getHistogram())
+                                        System.out.println("Color: " + "(" +link.getR() + ", " + link.getG() + ", " + link.getB() + "), Se repite: " + link.getCantidad() + " veces");
+                                }
+                                if(images.get(imageToPrintIndex).isHexmap()) {
+                                    HexHistogram_20614346_EspinozaGonzalez histogram;
+                                    Hexmap_20614346_EspinozaGonzalez  HM = (Hexmap_20614346_EspinozaGonzalez) images.get(imageToPrintIndex);
+                                    histogram = HM.histogram();
+                                    for (HexHistogramLink_20614346_EspinozaGonzalez link : histogram.getHistogram())
+                                        System.out.println("Color: " + link.getHex() + ", Se repite: " + link.getCantidad() + " veces");
+                                }
+                                break;
+                                
+                            default:
+                                System.out.println("\nLa opcion ingresada es incorrecta, por favor, intentelo nuevamente");
+                                imprimirMenu();
+                                break;
+                        }
+                        
                     }
 
                     //Volvemos al menu principal

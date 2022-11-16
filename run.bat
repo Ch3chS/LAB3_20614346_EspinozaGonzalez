@@ -1,0 +1,2 @@
+cd out
+java Main_20614346_EspinozaGonzalez

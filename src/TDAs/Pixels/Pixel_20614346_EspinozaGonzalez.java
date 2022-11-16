@@ -1,5 +1,9 @@
 package TDAs.Pixels;
 
+/**
+ *
+ */
+
 public class Pixel_20614346_EspinozaGonzalez{
 
     //Atributos
@@ -7,7 +11,6 @@ public class Pixel_20614346_EspinozaGonzalez{
 
     //Constructor
     public Pixel_20614346_EspinozaGonzalez(){}
-
 
     //selectores
     public int getX(){
