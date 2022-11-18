@@ -5,7 +5,7 @@ import TDAs.Image.Histogram.HistogramLinks.BitHistogramLink_20614346_EspinozaGon
 
 import java.util.LinkedList;
 
-public class BitHistogram_20614346_EspinozaGonzalez{
+public class BitHistogram_20614346_EspinozaGonzalez implements Histogram_20614346_EspinozaGonzalez{
 
     //Atributos
     LinkedList<BitHistogramLink_20614346_EspinozaGonzalez> histogram = new LinkedList<>();
@@ -53,6 +53,7 @@ public class BitHistogram_20614346_EspinozaGonzalez{
         return histogram;
     }
 
+    @Override
     public String MostUsed(){
         String mostused="";
         int cant = 0;

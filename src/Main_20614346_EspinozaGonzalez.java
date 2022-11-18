@@ -130,7 +130,7 @@ public class Main_20614346_EspinozaGonzalez {
                     }
                     //Obtenemos la imagen o volvemos al inicio en caso de requerirlo
                     if(imageToPrintIndex != -1){
-                        System.out.println("\nQue tipo de impresión desea realizar: \n\n1. Imprimir imagen\n2. Imprimir capas (depthLayers)\n3. Imprimir histograma de colores\n");
+                        System.out.println("\nQue tipo de impresion desea realizar: \n\n1. Imprimir imagen\n2. Imprimir capas (depthLayers)\n3. Imprimir histograma de colores\n");
                         System.out.print("\nEscoja una opcion: ");
                         int opcion3 = r.nextInt();
                         r.nextLine();
@@ -140,6 +140,7 @@ public class Main_20614346_EspinozaGonzalez {
                                 Image_20614346_EspinozaGonzalez imageToPrint = images.get(imageToPrintIndex);
                                 System.out.println(imageToPrint.imageToString());  //Imprimimos la imagen
                                 System.out.println("\nImagen impresa, regresando...");
+                                break;
                                 
                             case 2:   //Imprimir capas (DepthLayers)
                                 int capa = 0;

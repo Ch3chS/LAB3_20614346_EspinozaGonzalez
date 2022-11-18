@@ -4,7 +4,7 @@ package TDAs.Pixels;
  *
  */
 
-public class Pixel_20614346_EspinozaGonzalez{
+public class Pixel_20614346_EspinozaGonzalez implements Pixels_20614346_EspinozaGonzalez{
 
     //Atributos
     int x,y,depth;

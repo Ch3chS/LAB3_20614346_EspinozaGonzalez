@@ -6,7 +6,7 @@ import TDAs.Image.Histogram.HistogramLinks.HexHistogramLink_20614346_EspinozaGon
 import java.util.LinkedList;
 import java.util.Objects;
 
-public class HexHistogram_20614346_EspinozaGonzalez{
+public class HexHistogram_20614346_EspinozaGonzalez implements Histogram_20614346_EspinozaGonzalez{
     //Atributos
     LinkedList<HexHistogramLink_20614346_EspinozaGonzalez> histogram = new LinkedList<>();
 
@@ -53,6 +53,7 @@ public class HexHistogram_20614346_EspinozaGonzalez{
         return histogram;
     }
 
+    @Override
     public String MostUsed(){
         String mostused="";
         int cant = 0;

@@ -1,6 +1,6 @@
 package TDAs.Image.Histogram.HistogramLinks;
 
-public class BitHistogramLink_20614346_EspinozaGonzalez {
+public class BitHistogramLink_20614346_EspinozaGonzalez implements HistogramLink_20614346_EspinozaGonzalez{
 
     //Atributos
     int cantidad, bit;

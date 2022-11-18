@@ -5,7 +5,7 @@ import TDAs.Image.Pixmap_20614346_EspinozaGonzalez;
 
 import java.util.LinkedList;
 
-public class PixHistogram_20614346_EspinozaGonzalez{
+public class PixHistogram_20614346_EspinozaGonzalez implements Histogram_20614346_EspinozaGonzalez{
 
     //Atributos
     LinkedList<PixHistogramLink_20614346_EspinozaGonzalez> histogram = new LinkedList<>();
@@ -55,6 +55,7 @@ public class PixHistogram_20614346_EspinozaGonzalez{
         return histogram;
     }
 
+    @Override
     public String MostUsed(){
         String mostused="";
         int cant = 0;
