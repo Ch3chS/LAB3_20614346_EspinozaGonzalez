@@ -110,7 +110,7 @@ public class Main_20614346_EspinozaGonzalez {
 
                         }
                         else {
-                            modImage(imageToModIndex, menuMod());    //Si la imagen es correcta y esta descomprimida la modificamos
+                            modImage(imageToModIndex);    //Si la imagen es correcta y esta descomprimida la modificamos
 
                         }
                     }
@@ -130,7 +130,7 @@ public class Main_20614346_EspinozaGonzalez {
                     }
                     //Obtenemos la imagen o volvemos al inicio en caso de requerirlo
                     if(imageToPrintIndex != -1){
-                        System.out.println("\nQue tipo de impresion desea realizar: \n\n1. Imprimir imagen\n2. Imprimir capas (depthLayers)\n3. Imprimir histograma de colores\n");
+                        System.out.println("\nQue tipo de impresion desea realizar: \n\n1. Imprimir imagen\n2. Imprimir capas (depthLayers)\n3. Imprimir histograma de colores\n4. Volver\n");
                         System.out.print("\nEscoja una opcion: ");
                         int opcion3 = r.nextInt();
                         r.nextLine();
@@ -199,6 +199,9 @@ public class Main_20614346_EspinozaGonzalez {
                                     for (HexHistogramLink_20614346_EspinozaGonzalez link : histogram.getHistogram())
                                         System.out.println("Color: " + link.getHex() + ", Se repite: " + link.getCantidad() + " veces");
                                 }
+                                break;
+
+                            case 4:
                                 break;
                                 
                             default:
@@ -273,38 +276,59 @@ public class Main_20614346_EspinozaGonzalez {
 
     }
 
-    public static int menuMod(){
+
+    public static void modImage(int index){
+        // Primero imprimimos el menu general para todas las imagenes
         System.out.println("#### Modificadores de imagenes ####\nEscoja su opcion:\n");
-        System.out.println("1. flipH (invertir horizontalmente)" + "\n" +
-                        "2. flipV (invertir verticalmente)" + "\n" +
-                        "3. crop (recortar)" + "\n" +
-                        "4. imgRGBToHex" + "\n" +
+        System.out.println(""+
+                "1. compress (comrpimir imagen)" + "\n" +
+                "2. flipH (invertir horizontalmente)" + "\n" +
+                "3. flipV (invertir verticalmente)" + "\n" +
+                "4. crop (recortar)" + "\n" +
+                "5. rotate90 (rotar a la derecha)" + "\n" +
+                "6. changePixel (cambiar pixel en especifico)");
 
-                        "6. rotate90 (rotar a la derecha)" + "\n" +
-                        "7. compress (comrpimir imagen)" + "\n" +
-                        "8. changePixel (cambiar pixel en especifico)" + "\n" +
-                        "10. Volver\n");
+        //Luego los casos particulares + el volver
+        if(images.get(index).isBitmap()){
+            System.out.println("" +
+                    "7. invertColorBit  (invertir color)" + "\n" +
+                    "8. volver" + "\n");
+        }
+        if(images.get(index).isPixmap()){
+            System.out.println("" +
+                    "7. invertColorRGB  (invertir color)" + "\n" +
+                    "8. imageRGBToHex  (convertir a hexmap)" + "\n" +
+                    "9. volver" + "\n");
+        }
+        if(images.get(index).isHexmap()){
+            System.out.println("" +
+                    "7. volver" + "\n");
+        }
 
+        //Ya habiendo mostrado las opciones, damos a elegir una
         System.out.print("Ingrese su opcion: ");
         int choice = r.nextInt();
         r.nextLine();
         System.out.println("\n");
-        return choice;
-    }
 
-    public static void modImage(int index, int op){
-        switch (op){
+        //Opcion elegida
+        switch (choice){
             case 1:
-                images.set(index, images.get(index).flipH());
+                images.set(index, images.get(index).compress());
                 System.out.println("\nImagen modificada, regresando...\n");
                 break;
 
             case 2:
-                images.set(index, images.get(index).flipV());
+                images.set(index, images.get(index).flipH());
                 System.out.println("\nImagen modificada, regresando...\n");
                 break;
 
             case 3:
+                images.set(index, images.get(index).flipV());
+                System.out.println("\nImagen modificada, regresando...\n");
+                break;
+
+            case 4:
                 System.out.println("\nIngrese las coordenadas para el recorte: ");
                 System.out.print("\nCoordenada X1: ");
                 int x1 = r.nextInt();
@@ -319,25 +343,13 @@ public class Main_20614346_EspinozaGonzalez {
                 System.out.println("\nImagen modificada, regresando...\n");
                 break;
 
-            case 4:
-                if(images.get(index).isPixmap()) {
-                    images.set(index, images.get(index).imgRGBToHex((Pixmap_20614346_EspinozaGonzalez) images.get(index)));
-                    System.out.println("\nImagen modificada, regresando...\n");
-                }
-                else System.out.println("La imagen ingresada no puede usar este método, debe ser un Pixmap.");
-                break;
 
-            case 6:
+            case 5:
                 images.set(index, images.get(index).rotate90());
                 System.out.println("\nImagen modificada, regresando...\n");
                 break;
 
-            case 7:
-                images.set(index, images.get(index).compress());
-                System.out.println("\nImagen modificada, regresando...\n");
-                break;
-
-            case 8:  //En el caso de changePixel primero debemos crear un pixel del respectivo tipo, luego llamar al método
+            case 6:  //En el caso de changePixel primero debemos crear un pixel del respectivo tipo, luego llamar al método
                 System.out.print("\nIngrese la coordenada X del pixel a cambiar: ");
                 int x = r.nextInt();
                 System.out.print("Ingrese la coordenada Y del pixel a cambiar: ");
@@ -387,15 +399,44 @@ public class Main_20614346_EspinozaGonzalez {
                     //depth
                     images.set(index, i.changePixel(pixel));
                 }
-
-
                 System.out.println("\nImagen modificada, regresando...\n");
                 break;
 
+            case 7:
+                if(images.get(index).isBitmap()){     //invertColorBit
+                    Bitmap_20614346_EspinozaGonzalez b = (Bitmap_20614346_EspinozaGonzalez) images.get(index);
+                    images.set(index, b.invertColorBit());
+                    System.out.println("\nImagen modificada, regresando...\n");
+                }
+                if(images.get(index).isPixmap()){     //invertColorRGB
+                    Pixmap_20614346_EspinozaGonzalez p = (Pixmap_20614346_EspinozaGonzalez) images.get(index);
+                    images.set(index, p.invertColorRGB());
+                    System.out.println("\nImagen modificada, regresando...\n");
+                }
+                break;  //Si es hexmap solo vuelve, caso contrario se opera y despues se vuelve
+
+            case 8:
+                if(images.get(index).isPixmap()){     //imageRGBToHex
+                    images.set(index, images.get(index).imgRGBToHex());
+                    System.out.println("\nImagen modificada, regresando...\n");
+                }
+                if(images.get(index).isHexmap()){     //Si la imagen es un Hexmap entonces la opcion es incorrecta
+                    System.out.println("\nLa opcion ingresada es incorrecta, por favor, intentelo nuevamente");
+                }
+                break;   // Si es bitmap solo volvemos
+
+            case 9:
+                if(!images.get(index).isPixmap()){      //Si la imagen no es un Pixmap entonces la opcion es incorrecta
+                    System.out.println("\nLa opcion ingresada es incorrecta, por favor, intentelo nuevamente");
+                }
+                break;    //Si la imagen es un pixmap volvemos
 
             default:
                 System.out.println("\nLa opcion ingresada es incorrecta, por favor, intentelo nuevamente");
                 break;
         }
+        System.out.println("\nEstado actual de imagen: \n");
+        System.out.println(images.get(index).imageToString());
+        System.out.println("\n");
     }
 }

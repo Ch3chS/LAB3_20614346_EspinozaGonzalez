@@ -1,0 +1,22 @@
+El proyecto fue desarrollado en el sistema operativo Windows 11, en una IDE llamada 
+Intellij Idea, para ser especifico la versión 2022.2.3 de la ultimate edition para 
+estudiantes, lo anterior haciendo uso de OpenJDK versión 11.0.17+8 para sistemas de 
+64 bit.
+
+
+Para su uso solo debe seguir el siguiente paso:
+
+- Usar el archivo compile.bat haciendo doble click sobre el mismo
+	
+	Esto abrira una terminal donde se ejecutarán los comandos necesarios para compilar
+	el proyecto, y, seguido de esto se ejecutará el programa como tal en la misma terminal.
+
+Si quiere volver a usar el programa solo debe hacer doble click sobre el archivo run.bat,
+de esta forma no estará compilando el programa cada vez que quiera usarlo ya que con una 
+es suficiente (NO USAR run.bat SIN HABER COMPILADO PRIMERO EL PROGRAMA PUES NO FUNCIONARÁ).
+
+
+
+Recomendación:
+	Se recomienda ingresar exclusivamente lo solicitado por el programa, ya que, el mal 
+	uso del programa podría generar un error provocando el cierre del mismo.
