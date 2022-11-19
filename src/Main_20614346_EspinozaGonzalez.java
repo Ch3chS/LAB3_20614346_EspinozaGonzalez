@@ -8,7 +8,7 @@ import TDAs.Image.Histogram.HistogramLinks.*;
 
 public class Main_20614346_EspinozaGonzalez {
 
-    static LinkedList<Image_20614346_EspinozaGonzalez> images = new LinkedList<>();  //Este sera el almacen de imagenes
+    static LinkedList<Image_20614346_EspinozaGonzalez> images = new LinkedList<>();  //Este será el almacen de imagenes
     static Scanner r = new Scanner(System.in);  // Escaner para las entradas
     public static void main(String[] args){
 
@@ -89,7 +89,7 @@ public class Main_20614346_EspinozaGonzalez {
 
                     int imageToModIndex = imageSelector();
 
-                    if(imageToModIndex != -1){    // Si se selecciono la imagen correctamente procederemos con la eleccion de modificación
+                    if(imageToModIndex != -1){    // Si se seleccionó la imagen correctamente procederemos con la eleccion de modificación
 
                         if(images.get(imageToModIndex).isCompressed()){   //Si la imagen se encuentra comprimida solo se ofrecen 2 opciones
                             System.out.println("Esta imagen se encuentra comprimida\nEscoja una opcion:\n1. Descomprimir imagen\n2. Volver\n");
@@ -99,7 +99,7 @@ public class Main_20614346_EspinozaGonzalez {
 
                             switch (opcion2){
                                 case 1:
-                                    images.get(imageToModIndex).decompress();
+                                    images.set(imageToModIndex, images.get(imageToModIndex).decompress());
                                     System.out.println("\nImagen descomprimida, regresando...\n");
                                     break;
                                 case 2: break;
@@ -110,7 +110,7 @@ public class Main_20614346_EspinozaGonzalez {
 
                         }
                         else {
-                            modImage(imageToModIndex);    //Si la imagen es correcta y esta descomprimida la modificamos
+                            modImage(imageToModIndex);    //Si la imagen es correcta y está descomprimida la modificamos
 
                         }
                     }
@@ -254,7 +254,7 @@ public class Main_20614346_EspinozaGonzalez {
         }
         System.out.println(i+". volver");
 
-        //Preguntamos al usuario sobre cual imagen desea operar
+        //Preguntamos al usuario sobre cuál imagen desea operar
         int index;
         System.out.print("\nIngrese su opcion: ");
         index = r.nextInt();
@@ -413,7 +413,7 @@ public class Main_20614346_EspinozaGonzalez {
                     images.set(index, p.invertColorRGB());
                     System.out.println("\nImagen modificada, regresando...\n");
                 }
-                break;  //Si es hexmap solo vuelve, caso contrario se opera y despues se vuelve
+                break;  //Si es hexmap solo vuelve, caso contrario se opera y después se vuelve
 
             case 8:
                 if(images.get(index).isPixmap()){     //imageRGBToHex

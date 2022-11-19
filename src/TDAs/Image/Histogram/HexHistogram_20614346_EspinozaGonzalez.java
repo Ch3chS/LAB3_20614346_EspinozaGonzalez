@@ -2,21 +2,40 @@ package TDAs.Image.Histogram;
 
 import TDAs.Image.Hexmap_20614346_EspinozaGonzalez;
 import TDAs.Image.Histogram.HistogramLinks.HexHistogramLink_20614346_EspinozaGonzalez;
-
 import java.util.LinkedList;
 import java.util.Objects;
 
+/**
+ * Esta clase corresponde al histograma de una imagen de tipo Hexmap
+ * @author Sergio Espinoza
+ * @version 1.0
+ * @see TDAs.Image.Histogram.Histogram_20614346_EspinozaGonzalez
+ */
+
 public class HexHistogram_20614346_EspinozaGonzalez implements Histogram_20614346_EspinozaGonzalez{
-    //Atributos
+
+    /**
+     * El único atributo es una lista enlazada de eslabones tipo HexHistogramLink
+     * @see HexHistogramLink_20614346_EspinozaGonzalez
+     */
     LinkedList<HexHistogramLink_20614346_EspinozaGonzalez> histogram = new LinkedList<>();
 
-    //Constructor
+    /**
+     * Constructor de objeto tipo HexHistogram
+     */
     public HexHistogram_20614346_EspinozaGonzalez(){}
 
-    //Métodos
-
+    /**
+     * Método que permite obtener la lista enlazada con los eslabones
+     * @return histograma como tal
+     */
     public LinkedList<HexHistogramLink_20614346_EspinozaGonzalez> getHistogram() {return histogram;}
 
+    /**
+     * Método que permite revisar si un color hexadecimal en específico ya se encuentra contado en el histograma
+     * @param hex Color hexadecimal a revisar
+     * @return Booleano (True si ya se encuentra, False si no se encuentra)
+     */
     public boolean isInHistogram(String hex){
         for(HexHistogramLink_20614346_EspinozaGonzalez link: getHistogram()){
             if(Objects.equals(hex, link.getHex())) return true;
@@ -24,6 +43,12 @@ public class HexHistogram_20614346_EspinozaGonzalez implements Histogram_2061434
         return false;
     }
 
+    /**
+     * Método que permite contar la cantidad de veces que se repite un color hexadecimal en una imagen
+     * @param hex Hex a contar
+     * @param img Imagen en la que se desea saber la cantidad
+     * @return Número de veces que se repite
+     */
     public int countRepeats(String hex, Hexmap_20614346_EspinozaGonzalez img){
         int count = 0;
 
@@ -35,6 +60,11 @@ public class HexHistogram_20614346_EspinozaGonzalez implements Histogram_2061434
         return count;
     }
 
+    /**
+     * Método inicializador del histograma una vez fue creado
+     * @param img Hexmap desde el que se inicializó
+     * @return HexHistogram inicializado
+     */
     public HexHistogram_20614346_EspinozaGonzalez histogramInit(Hexmap_20614346_EspinozaGonzalez img) {
         HexHistogram_20614346_EspinozaGonzalez histogram = new HexHistogram_20614346_EspinozaGonzalez();
 
@@ -53,6 +83,11 @@ public class HexHistogram_20614346_EspinozaGonzalez implements Histogram_2061434
         return histogram;
     }
 
+    /**
+     * Implementación del método de la interfaz para el histogram de una imagen tipo Hexmap
+     * @see Histogram_20614346_EspinozaGonzalez
+     * @return Color hexadecimal más usado
+     */
     @Override
     public String MostUsed(){
         String mostused="";

@@ -21,3 +21,4 @@ Para compilar usar el comando .\compile.bat
     16/11/2022: Mejoras en opciones de vizualización en el menú, faltan mejoras el apartado de los modificadores
     17/11/2022: Interfaces faltantes agregadas
     18/11/2022: Menu notablemente mejorado (Posible versión final del mismo)
+    19/11/2022: Documentación (parte 1)

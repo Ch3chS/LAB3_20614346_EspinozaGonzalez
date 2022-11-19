@@ -1,16 +1,20 @@
 package TDAs.Image;
 
-import TDAs.Pixels.Pixbit_20614346_EspinozaGonzalez;
-import TDAs.Pixels.Pixel_20614346_EspinozaGonzalez;
 import TDAs.Pixels.Pixhex_20614346_EspinozaGonzalez;
-
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Esta clase define la imagen como algo con ancho y alto, además de tener un color más usado y una lista de
+ * profundidades en caso de comprimirse, para, de esta forma, no perder dichos datos.
+ * @author Sergio Espinoza
+ * @version 1.0
+ */
+
 public class Image_20614346_EspinozaGonzalez{
-    //Atributos
+
+
     String mostUsed = ""; //El mostUsed es un valor que se setea al comprimir la imagen y se devuelve a "" al descomprimirla
     List<Integer> depths = new ArrayList<>();  //Esto solo se usara si se comprime una imagen, para guardar las profundidades de los pixeles eliminados
 
