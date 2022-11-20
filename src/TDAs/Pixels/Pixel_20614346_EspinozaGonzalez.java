@@ -1,7 +1,7 @@
 package TDAs.Pixels;
 
 /**
-* Esta superclase define el pixel como una entidad con una posición (x,y) y con una profundidad (depth)
+* Esta superclase define el pixel como una entidad con una posición (x, y) y con una profundidad (depth)
 * @author Sergio Espinoza
 * @version 1.0
  */

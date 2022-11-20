@@ -1,20 +1,34 @@
 package TDAs.Image;
 
 import TDAs.Image.Histogram.PixHistogram_20614346_EspinozaGonzalez;
-import TDAs.Pixels.Pixbit_20614346_EspinozaGonzalez;
 import TDAs.Pixels.Pixrgb_20614346_EspinozaGonzalez;
+import java.util.*;
 
-import java.util.LinkedList;
-import java.util.Scanner;
+/**
+ * Esta subclase de Image define un Pixmap como una imagen hecha de pixeles tipo Pixrgb
+ * @author Sergio Espinoza
+ * @version 1.0
+ * @see TDAs.Image.Image_20614346_EspinozaGonzalez
+ * @see TDAs.Image.Map_20614346_EspinozaGonzalez
+ */
 
 public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGonzalez implements Map_20614346_EspinozaGonzalez{
 
-    //Atributos
+    /**
+     * Este tipo de imagen usa una matriz para almacenar sus píxeles de tipo pixrgb
+     */
     Pixrgb_20614346_EspinozaGonzalez[][] pixels;
 
-    //Constructor
+    /**
+     * Método constructor de una imagen de tipo pixrgb
+     */
     public Pixmap_20614346_EspinozaGonzalez(){}
 
+    /**
+     * Método para inicializar la imagen, notar que crea todos los objetos clase pixrgb en su cuerpo
+     * @param width Ancho de la imagen
+     * @param height Alto de la imagen
+     */
     public void initImage(int width, int height){
         Scanner r = new Scanner(System.in);  // Lector
         int valor;
@@ -45,11 +59,16 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
         }
     }
 
-    //Selector
+    /**
+     * Método para obtener los píxeles tipo pixrgb de la imagen
+     * @return Pixeles tipo pixrgb
+     */
     public Pixrgb_20614346_EspinozaGonzalez[][] getPixels() {return pixels;}
 
-
-    //Otras funciones
+    /**
+     * Método que voltea la imagen en el eje X
+     * @return Imagen volteada
+     */
     @Override
     public Image_20614346_EspinozaGonzalez flipH() {
         Pixrgb_20614346_EspinozaGonzalez[] temp;
@@ -61,6 +80,10 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
         return this;
     }
 
+    /**
+     * Método que voltea la imagen en el eje Y
+     * @return Imagen volteada
+     */
     @Override
     public Image_20614346_EspinozaGonzalez flipV(){
         Pixrgb_20614346_EspinozaGonzalez temp;
@@ -73,10 +96,17 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
 
             }
         }
-
         return this;
     }
 
+    /**
+     * Método que permite recortar una imagen, en este caso de tipo Pixmap
+     * @param x1 X desde la que se desea recortar
+     * @param y1 Y desde la que se desea recortar
+     * @param x2 X hasta la cual se desea recortar (Debe ser >= x1)
+     * @param y2 Y hasta la cual se desea recortar (Debe ser >= y1)
+     * @return Imagen recortada
+     */
     @Override
     public Pixmap_20614346_EspinozaGonzalez crop(int x1, int y1, int x2, int y2){
         Pixrgb_20614346_EspinozaGonzalez[][] newPixels;
@@ -93,6 +123,10 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
         return this;
     }
 
+    /**
+     * Método que instancia e inicializa un PixHistogram
+     * @return PixHistogram correspondiente al Pixmap que usa el método
+     */
     public PixHistogram_20614346_EspinozaGonzalez histogram(){
         PixHistogram_20614346_EspinozaGonzalez histogram = new PixHistogram_20614346_EspinozaGonzalez();  //Se crea objeto histogram
 
@@ -101,11 +135,15 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
         return histogram;  //Se retorna
     }
 
+    /**
+     * Método que rota la imagen que lo usa
+     * @return Imagen rotada
+     */
     @Override
     public Pixmap_20614346_EspinozaGonzalez rotate90(){
         Pixrgb_20614346_EspinozaGonzalez[][] newPixels;
         Pixmap_20614346_EspinozaGonzalez img = new Pixmap_20614346_EspinozaGonzalez();
-        this.flipV();  //Invertimos los pixeles en el eje Y de la imagen original
+        this.flipV();  //Invertimos los píxeles en el eje Y de la imagen original
 
         newPixels = new Pixrgb_20614346_EspinozaGonzalez[getHeight()][getWidth()];  //Nuevos pixeles con width y height intercambiados
         img.setWidth(getHeight());    //Invertimos width y height para la imagen rotada
@@ -121,11 +159,15 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
         return img;
     }
 
+    /**
+     * Método que comprime una imagen
+     * @return imagen comprimida
+     */
     @Override
     public Pixmap_20614346_EspinozaGonzalez compress(){
         if(!this.isCompressed()){    //Si no esta comprimida la comprimimos
 
-            //Preparación pre-compresión
+            //Preparación precompresión
             PixHistogram_20614346_EspinozaGonzalez histogram = histogram();
             setMostUsed(histogram.MostUsed());  //Seteamos el color más usado para su posterior uso aquí y en decompress
             String temp;
@@ -144,14 +186,23 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
             return this;  //Retornamos la imagen ya comprimida
         }
         return this;   //Si la imagen ya estaba comprimida no le hacemos nada y la retornamos
-        //(no esta la posibilidad en el menú de que no este comprimida y acceda a esto pero para que este tratado el caso)
+        //(no está la posibilidad en el menú de que no esté comprimida y acceda a esto pero para que este tratado el caso)
     }
 
+    /**
+     * Método que cambia el pixel de una imagen por el ingresado (La posición viene en el pixel de entrada)
+     * @param pixel Pixel tipo Pixrgb con su respectiva posición
+     * @return Pixmap con el pixel cambiado
+     */
     public Pixmap_20614346_EspinozaGonzalez changePixel(Pixrgb_20614346_EspinozaGonzalez pixel){
         getPixels()[pixel.getX()][pixel.getY()] = pixel;
         return this;
     }
 
+    /**
+     * Método que invierte todos los colores (rgb) de un Pixmap
+     * @return Imagen con colores invertidos
+     */
     public Pixmap_20614346_EspinozaGonzalez invertColorRGB(){
         for(int i=0; i<getHeight(); i++){
             for(int j=0; j<getWidth();j++) {
@@ -161,6 +212,10 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
         return this;
     }
 
+    /**
+     * Método que convierte una imagen tipo Pixmap a un String que represente a la misma
+     * @return String de la imagen (Solo con los colores en la posición correcta)
+     */
     @Override
     public String imageToString(){
         if (isCompressed()) return "La imagen se encuentra comprimida, por favor descomprimirla para poder visualizarla";
@@ -175,13 +230,17 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
         return string.toString();
     }
 
+    /**
+     * Método que separa las capas de la imagen que lo usa en una lista enlazada de imágenes de igual ancho y alto
+     * @return Lista enlazada con las distintas capas de la imagen inicial (imágenes también)
+     */
     public LinkedList<Pixmap_20614346_EspinozaGonzalez> depthLayers(){
         LinkedList<Pixmap_20614346_EspinozaGonzalez> LayerList = new LinkedList<>();
 
         for(int k = 0; k <= maxDepth(); k++){                    //Haremos esto en cada capa de la imagen
             LayerList.add(new Pixmap_20614346_EspinozaGonzalez());  //Agregamos una nueva imagen a la lista
             LayerList.get(k).setWidth(getWidth());
-            LayerList.get(k).setHeight(getHeight());  //Las imagenes de la lista poseen las mismas dimensiones que la original
+            LayerList.get(k).setHeight(getHeight());  //Las imágenes de la lista poseen las mismas dimensiones que la original
             LayerList.get(k).pixels = new Pixrgb_20614346_EspinozaGonzalez[getWidth()][getHeight()];   //Inicializamos los pixeles
 
             for(int i=0; i<getHeight(); i++){       //Ahora se le dará valores de color a los pixeles de la capa,
@@ -204,6 +263,10 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
         return LayerList;
     }
 
+    /**
+     * Método para descomprimir una imagen comprimida previamente (No se verifica que esté comprimida pues esto ya se hizo en el menú)
+     * @return Imagen descomprimida
+     */
     @Override
     public Pixmap_20614346_EspinozaGonzalez decompress(){
         String[] mostused = getMostUsed().split(" ");
@@ -216,7 +279,7 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
             for(int j=0; j<getWidth();j++){
                 if(getPixels()[j][i] == null){   //Si el pixel no se encuentra (fue eliminado al comprimir)
                     getPixels()[j][i] = new Pixrgb_20614346_EspinozaGonzalez();  //Creamos uno nuevo
-                    getPixels()[j][i].setR(R);                                   //Con el color más usado pre compresión
+                    getPixels()[j][i].setR(R);                                   //Con el color más usada precompresión
                     getPixels()[j][i].setG(G);
                     getPixels()[j][i].setB(B);
                     getPixels()[j][i].setDepth(depths.get(depthIndex));          //Obtenemos la profundidad del mismo
@@ -224,7 +287,7 @@ public class Pixmap_20614346_EspinozaGonzalez extends Image_20614346_EspinozaGon
                 }
             }
         }
-        setMostUsed("");    //devolvemos el mostUsed al valor "" para que se sepa que esta descomprimida
+        setMostUsed("");    //devolvemos el mostUsed al valor"" para que se sepa que está descomprimida
         return this;
     }
 }

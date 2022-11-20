@@ -6,30 +6,39 @@ import TDAs.Pixels.Pixhex_20614346_EspinozaGonzalez;
 import TDAs.Image.Histogram.*;
 import TDAs.Image.Histogram.HistogramLinks.*;
 
+/**
+ * Archivo main donde se inicializa el programa;
+ * Este solo corresponde al menú y sus opciones, pues el programa como tal hace uso de clases para operar;
+ * de este modo, en este archivo solo encontrará opciones instancias de clases y llamados a métodos de las mismas.
+ */
+
 public class Main_20614346_EspinozaGonzalez {
 
-    static LinkedList<Image_20614346_EspinozaGonzalez> images = new LinkedList<>();  //Este será el almacen de imagenes
-    static Scanner r = new Scanner(System.in);  // Escaner para las entradas
+    /**
+     * Notar que las imagenes se almacenarán en una lista enlazada por lo que se podrá acceder a todas las creadas
+     * hasta que se finalice el programa (IMPORTANTE: en caso de reiniciar el programa se perderán)
+     */
+    static LinkedList<Image_20614346_EspinozaGonzalez> images = new LinkedList<>();  //Este será el almacén de imágenes
+    static Scanner r = new Scanner(System.in);  // Scanner para las entradas
     public static void main(String[] args){
-
-
 
         // A continuación se encuentra el código para el menú
         String exit = "e";
-        String opcion="i";
+        String option="i";
         imprimirMenu();
-        while (!Objects.equals(opcion, exit)) {
-            switch (opcion) {
+
+        while (!Objects.equals(option, exit)) {
+            switch (option) {
                 case "i": break;
                 case "1":
-                    int width=0, height=0,opcion2;
+                    int width=0, height=0,option2;
 
                     System.out.println("Que tipo de imagen desea crear, las opciones son:\n1. Crear Bitmap\n2. Crear Pixmap\n3. Crear Hexmap\n4. Volver\n");
                     System.out.print("Ingrese su eleccion: ");
-                    opcion2 = r.nextInt();
+                    option2 = r.nextInt();
                     r.nextLine();
 
-                    if(opcion2 == 1 || opcion2 == 2 || opcion2 == 3) {
+                    if(option2 == 1 || option2 == 2 || option2 == 3) {
                         System.out.print("\nIngrese el ancho de la imagen: ");
                         width = r.nextInt();
                         System.out.print("Ingrese el alto de la imagen: ");
@@ -38,7 +47,7 @@ public class Main_20614346_EspinozaGonzalez {
                         System.out.print("\n");
                     }
 
-                    switch (opcion2) {
+                    switch (option2) {
                         case 1:
                             Bitmap_20614346_EspinozaGonzalez i1 = new Bitmap_20614346_EspinozaGonzalez();
                             i1.initImage(width,height);
@@ -94,10 +103,10 @@ public class Main_20614346_EspinozaGonzalez {
                         if(images.get(imageToModIndex).isCompressed()){   //Si la imagen se encuentra comprimida solo se ofrecen 2 opciones
                             System.out.println("Esta imagen se encuentra comprimida\nEscoja una opcion:\n1. Descomprimir imagen\n2. Volver\n");
                             System.out.print("Ingrese su eleccion: ");
-                            opcion2=r.nextInt();
+                            option2=r.nextInt();
                             r.nextLine();
 
-                            switch (opcion2){
+                            switch (option2){
                                 case 1:
                                     images.set(imageToModIndex, images.get(imageToModIndex).decompress());
                                     System.out.println("\nImagen descomprimida, regresando...\n");
@@ -121,15 +130,16 @@ public class Main_20614346_EspinozaGonzalez {
 
                 case "3": //Visualizar una imagen
 
-                    int imageToPrintIndex = imageSelector();
+                    int imageToPrintIndex = imageSelector();      // Se selecciona la imagen
 
-                    if(images.get(imageToPrintIndex).isCompressed()){
-                        System.out.println("La imagen seleccionada se encuentra comprimida, por favor descomrpimirla antes de poder visualizarla\n");
-                        imprimirMenu();
-                        break;
-                    }
-                    //Obtenemos la imagen o volvemos al inicio en caso de requerirlo
-                    if(imageToPrintIndex != -1){
+                    if(imageToPrintIndex != -1){//Obtenemos la imagen o volvemos al inicio en caso de requerirlo
+                        if(images.get(imageToPrintIndex).isCompressed()){
+                            System.out.println("La imagen seleccionada se encuentra comprimida, por favor descomprimirla antes de poder visualizarla\n");
+                            imprimirMenu();
+                            break;
+                        }
+
+
                         System.out.println("\nQue tipo de impresion desea realizar: \n\n1. Imprimir imagen\n2. Imprimir capas (depthLayers)\n3. Imprimir histograma de colores\n4. Volver\n");
                         System.out.print("\nEscoja una opcion: ");
                         int opcion3 = r.nextInt();
@@ -223,18 +233,29 @@ public class Main_20614346_EspinozaGonzalez {
                     break;
             }
             System.out.print("Ingrese su opcion: ");
-            opcion = r.nextLine();
+            option = r.nextLine();
             System.out.println("\n");
         }
         System.out.println("\nLa ejecucion del programa ha finalizado.\n");
     }
 
 
+    /**
+     * Lo único que hace esto es imprimir el menú principal
+     * se hizo de esta forma para no repetir el mismo código tantas veces.
+     */
     public static void imprimirMenu(){
         System.out.println("\n### Menu principal ###\nEscoja su opcion:\n");
         System.out.println("1. Crear una imagen\n2. Modificar una imagen\n3. Visualizar imagen\ne. salir\n");
     }
 
+
+    /**
+     * Para las opciones 2 y 3 del menú (Modificar o Imprimir imagen)
+     * Primero que nada se debe seleccionar la imagen sobre la que se realizará la opción;
+     * debido a esto aquí hay un selector que muestra las opciones y recibe la elegida
+     * @return indice de la imagen a operar
+     */
     public static int imageSelector(){
         System.out.println("\n#### Selector de Imagenes ####\nEscoja su opcion:\n");
 
@@ -277,11 +298,16 @@ public class Main_20614346_EspinozaGonzalez {
     }
 
 
+    /**
+     * En caso de querer modificar la imagen elegida se muestra un menú cuyas opciones dependerán del tipo de imagen
+     * seguido de esto se recibirá lo elegido por el usuario y se procederá con lo mismo.
+     * @param index indice de la imagen a modificar
+     */
     public static void modImage(int index){
-        // Primero imprimimos el menu general para todas las imagenes
+        // Primero imprimimos el menu general para todas las imágenes
         System.out.println("#### Modificadores de imagenes ####\nEscoja su opcion:\n");
         System.out.println(""+
-                "1. compress (comrpimir imagen)" + "\n" +
+                "1. compress (comprimir imagen)" + "\n" +
                 "2. flipH (invertir horizontalmente)" + "\n" +
                 "3. flipV (invertir verticalmente)" + "\n" +
                 "4. crop (recortar)" + "\n" +

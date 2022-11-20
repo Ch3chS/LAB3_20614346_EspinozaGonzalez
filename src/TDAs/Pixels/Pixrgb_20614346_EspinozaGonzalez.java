@@ -10,8 +10,8 @@ package TDAs.Pixels;
 public class Pixrgb_20614346_EspinozaGonzalez extends Pixel_20614346_EspinozaGonzalez{
 
     /**
-     * El color de tipo rgb a continuación se caracteriza por que cada uno de estos (r,g,b) toma valores entre 0 y 255.
-     * siendo la R el rojo del color (Red), la G el verde del color (G) y B el azul del color (Blue)
+     * El color de tipo rgb a continuación se caracteriza porque cada uno de estos (r, g, b) toma valores entre 0 y 255.
+     * Siendo la R el rojo del color (Red), la G el verde del color (G) y B el azul del color (Blue)
      */
     int r,g,b;
 
@@ -62,7 +62,7 @@ public class Pixrgb_20614346_EspinozaGonzalez extends Pixel_20614346_EspinozaGon
     //Otras Funciones
 
     /**
-     * Método que modifica los diferente canales de color de un pixrgb al simétricamente opuesto
+     * Método que modifica los diferentes canales de color de un pixrgb al simétricamente opuesto
      */
     public void invertColorRGB(){
         setR(255-getR());

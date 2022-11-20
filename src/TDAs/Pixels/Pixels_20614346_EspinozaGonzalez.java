@@ -1,7 +1,7 @@
 package TDAs.Pixels;
 
 /**
- * Este TDA corresponde al pixel, sin embargo todos sus métodos estan descritos en la superclase pixel
+ * Este TDA corresponde al pixel; sin embargo, todos sus métodos están descritos en la superclase pixel
  * Por favor revisar la documentación de los métodos ahí
  * @see Pixel_20614346_EspinozaGonzalez
  */
